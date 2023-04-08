@@ -1,0 +1,288 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+body, html {
+  height: 150%;
+  margin: 0;
+  font-family: 'PT Sans', sans-serif;
+  background-color: rgb(47, 24, 54);
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.content {
+  padding-top: 30px;
+}
+.page-info{
+    padding: 20px;
+    margin: 50px 400px;
+    background-color: rebeccapurple;
+    border: 2px solid transparent;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+.vl {
+  border-left: 6px solid green;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+.center {
+  text-align: center;
+}
+table, th, td {
+  border: 1px solid;
+}
+table {
+  width: 70%;
+  empty-cells: show;
+}
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+}
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+body {font-family: Arial;}
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #a033b9;
+  align-self: center;
+}
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  align-self: center;
+}
+.tab button:hover {
+  background-color: #ddd;
+}
+.tab button.active {
+  background-color: #ccc;
+}
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+  align-self: center;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+.center {
+  text-align: center;
+  color: #ddd;
+}
+table, th, td {
+  border: 1px solid;
+}
+table {
+  width: 70%;
+  empty-cells: show;
+}
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+}
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+.white-text {
+    color: white;
+    width: 500px;
+    text-align: center;
+
+}
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  align-self: center;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: center;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+div.form {
+  display: block;
+  text-align: center;
+}
+form {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align:left;
+}
+</style>
+
+<div class="content">
+  <div class="page-info">
+    <p>Here you can view details about an expedition such as avalible spacerafts, ticket prices, and even purchase seats. What are you waiting for?</p>
+</div>
+
+
+<div class="tab">
+    {% for v in cur_vehi %}
+        <button class="tablinks" onclick="openCity(event, '{{v.id}}')"><h3>{{v.ship.name}}</h3></button>
+    {% endfor %}
+
+</div>
+
+{% for v in cur_vehi %}
+<div id="{{v.id}}" class="tabcontent">
+    <div class="center">
+        <h2>{{v.ship.name}}</h2>
+        <h4>Current Passengers: {{v.passengers}}</h4>
+        <h4>Capacity: {{v.ship.capacity}}</h4>
+        <h4>Ticket Cost: ${{v.ship.ticket_cost}}</h4>
+        
+    </div>
+</div>
+{% endfor %}
+
+
+{% if exp.avalible == True %}
+  <div class="white-text">
+      <h3>Please fill out the form below to purchase your ticket!</h3>
+      <form action="" method="POST">
+          {% csrf_token %}
+          <label for="fname">Address</label>
+          <input type="text" id="address" name="address" placeholder="Address">
+      
+          <label for="lname">Enter City</label>
+          <input type="text" id="city" name="city" placeholder="City">
+
+          <label for="lname">Enter State</label>
+          <input type="text" id="state" name="state" placeholder="State">
+
+          <label for="lname">Enter Zipcode</label>
+          <input type="text" id="zipcode" name="zipcode" placeholder="State">
+
+          <label for="lname">Enter Credit Card Number</label>
+          <input type="text" id="card" name="card" placeholder="card">
+
+          <label for="lname">Enter The Number of Tickets You Wish To Purchase For the Selected SpaceCraft</label>
+          <input type="text" id="tickets" name="tickets" placeholder="# of tickets">
+      
+          <label for="ship">Choose your desired spacecraft</label>
+          <select id="vehicle" name="vehicle">
+            {% for v in cur_vehi %}
+              <option value="{{v.id}}">{{v.ship.name}}</option>
+            {% endfor %}
+          </select>
+          <input type="submit" value="Make Payment">
+      </form>
+  </div>
+{% elif exp.avalible == False %} 
+    <div class="page-info">
+      <p>Sorry this expedition is closed and is not avalible for purchasing tickets. Or currently doesn't have an registered spacecrafts.</p>
+    </div>
+{% endif %}
+
+
+
+{% if succesful_payment == True %}
+<div class="page-info">
+  <p>Please check your order history for a confirmation and get ready to fly! Exit and revist this page to see the updated passengers.</p>
+</div>
+{% endif %}
+
+
+
+
+
+<script>
+    function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    }
+    </script>
+{% endblock %}

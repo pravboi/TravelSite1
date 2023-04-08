@@ -1,0 +1,106 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+body, html {
+  height: 150%;
+  margin: 0;
+  font-family: 'PT Sans', sans-serif;
+  background-color: rgb(47, 24, 54);
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.content {
+  padding-top: 30px;
+}
+.page-info{
+    padding: 20px;
+    margin: 50px 400px;
+    background-color: rebeccapurple;
+    border: 2px solid transparent;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid rgb(236, 31, 232);
+  align-self: center;
+}
+
+.th-g, .td-g {
+  text-align: center;
+  padding: 8px;
+  background-color: rgb(64, 224, 107);
+}
+
+.th-r, .td-r {
+  text-align: center;
+  padding: 8px;
+  background-color: rgb(222, 59, 59);
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
+
+<div class="content">
+  <div class="page-info">
+    <p>Welcome to our Space Flight Experiences page! Here, you will find all of the exciting and unique experiences that Galaxy Tours has to offer. We have worked tirelessly to create a diverse range of services to cater to all of your space travel needs and desires. Select an experience below:</p>
+</div>
+
+
+
+
+
+
+
+
+<div style="overflow-x:auto;">
+  <table>
+    {% for e in expeditions %}
+        <tr>
+          {% if e.avalible == True %}
+            <th class="th-g"></th>
+            <th class="th-g">
+              <a href="{% url 'view-expedition' e.id %}">View Trip</a>
+              <h2>{{e.name}}: {{e.exp_type}}: {{e.launch_date}}</h2> 
+              <h4>Avalible Spacecrafts:</h4>
+              {% for v in cur_vehicles %}
+                {% if e == v.expedition %}
+                    <h5>Ship: {{v.ship.name}} Tickets avalible: {{v.passengers}}/{{v.ship.capacity}}.</h5>
+                {% endif %}
+              {% endfor %}
+            </th>
+          {% elif e.avalible == False %}
+            <th class="th-r"></th>
+            <th class="th-r">
+              <a href="{% url 'view-expedition' e.id %}">View Trip</a>
+              <h2>{{e.name}}: {{e.exp_type}}: {{e.launch_date}}</h2> 
+              <h4>Avalible Spacecrafts:</h4>
+              {% for v in cur_vehicles %}
+                {% if e == v.expedition %}
+                    <h5>Ship: {{v.ship.name}} Tickets avalible: {{v.passengers}}/{{v.ship.capacity}}.</h5>
+                {% endif %}
+              {% endfor %}
+            </th>
+
+          {% endif %}
+        </tr>
+
+    {% endfor %}
+  </table>
+</div>
+
+
+{% endblock %}

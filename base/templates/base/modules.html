@@ -1,0 +1,107 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+body, html {
+  height: 150%;
+  margin: 0;
+  font-family: 'PT Sans', sans-serif;
+  background-color: rgb(47, 24, 54);
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.flex-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    justify-content: space-evenly;
+}
+
+.flex-box {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(purple, red);
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    line-height: 200px;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.img-box {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(purple, red);
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    line-height: 200px;
+    margin: 10px;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.text {
+    width: 200px;
+    height: 200px;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+}
+.page-info{
+    padding: 20px;
+    margin: 50px 400px;
+    background-color: rebeccapurple;
+    border: 2px solid transparent;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+</style>
+
+<div class="content">
+  <div class="page-info">
+    <p>The safety and training course is a crucial component of the Galactic Tours experience. This online course is designed to prepare our passengers for the incredible journey that awaits them, whether they are embarking on a suborbital or orbital trip. The course covers a wide range of topics, including spacecraft operation, emergency procedures, in-flight procedures, and spacesuit training. Our team of expert trainers and astronauts have developed the course to ensure that passengers have the knowledge and skills they need to stay safe and enjoy their journey to the fullest.
+        Completing the safety and training course is mandatory for all Galactic Tours passengers, as it is essential for their safety and the safety of those around them. We take the safety of our passengers seriously, and by completing the course, they can feel confident and prepared for their upcoming adventure. The course is accessible online, making it convenient and easy to complete from the comfort of your own home. At Galactic Tours, we are committed to providing the most exciting and safe space tourism experience, and the safety and training course is an essential part of that commitment.</p>
+</div>
+
+
+<div class="flex-container">
+
+    {% for m in modules %}
+        <a href="{% url 'take-module' m.id %}"><img class="img-box" src="{% static 'moon2.jpg' %}"></img></a>
+    {% endfor %} 
+    
+</div>
+
+<div class="flex-container">
+    {% for m in modules %}
+        <div class="text">
+            {{m.title}}
+        </div>
+    {% endfor %}
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

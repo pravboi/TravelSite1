@@ -1,0 +1,237 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+body, html {
+  height: 150%;
+  margin: 0;
+  font-family: 'PT Sans', sans-serif;
+  background-color: rgb(47, 24, 54);
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.content {
+  align-items: center;
+  align-content: center;
+  color: white;
+}
+.page-info{
+    padding: 20px;
+    margin: 50px 400px;
+    background-color: rebeccapurple;
+    border: 2px solid transparent;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+}
+.vl {
+  border-left: 6px solid green;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+.center {
+  text-align: center;
+}
+table, th, td {
+  border: 1px solid;
+}
+table {
+  width: 70%;
+  empty-cells: show;
+}
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+}
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+body {font-family: Arial;}
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #a033b9;
+}
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+.tab button:hover {
+  background-color: #ddd;
+}
+.tab button.active {
+  background-color: #ccc;
+}
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+  align-self: center;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+.center {
+  text-align: center;
+  color: #ddd;
+}
+table, th, td {
+  border: 1px solid;
+}
+table {
+  width: 70%;
+  empty-cells: show;
+}
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+}
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+.white-text {
+    color: white;
+    width: 500px;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  align-self: center;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #9839d8;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: center;
+}
+
+input[type=submit]:hover {
+  background-color: #9314e7;
+}
+
+
+
+
+
+ol {
+  background: #9a36b3;
+  padding: 20px;
+}
+
+
+
+ol li {
+  background: #ffe5e5;
+  color: rgb(173, 60, 218);
+  padding: 5px;
+  margin-left: 35px;
+}
+
+</style>
+</style>
+
+<div class="content">
+  <div class="page-info">
+    <p><h4>{{module.title}} Module.</h4> You must answer all of these questions correctly to complete this module. Only select 1 answer per question. Current High Score: {{module.max_score}}%</p>
+</div>
+
+
+<div class="content">
+    <body>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for q in questions %}
+                <h1>{{q.prompt}}</h1>
+
+                <ol>
+                    <li>{{q.choice1}}</li>
+                    <li>{{q.choice2}}</li>
+                    <li>{{q.choice3}}</li>
+                    <li>{{q.choice4}}</li>
+                </ol>
+                <label for="lname">Enter answer number either 1,2,3,4</label>
+                <input type="text" id="zipcode" name="{{q.prompt}}" placeholder="State"> <!--value is the thing that is entered, key in dict is the name-->
+            {% endfor %}
+    
+            <input type="submit" value="Submit Quiz">
+        </form>
+    </body>
+</div>
+
+
+
+
+
+{% endblock %}

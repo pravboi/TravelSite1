@@ -1,0 +1,137 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+body, html {
+    height: 150%;
+    margin: 0;
+    background-color: rgb(47, 24, 54);
+}
+.content {
+    padding-top: 30px;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
+}
+.flex-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    justify-content: space-evenly;
+}
+
+.flex-box {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(purple, red);
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    line-height: 200px;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.img-box {
+    width: 500px;
+    height: 800px;
+    background: linear-gradient(purple, red);
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    line-height: 200px;
+    margin: 10px;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.text {
+    width: 200px;
+    height: 200px;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+}
+.page-info{
+    padding: 50px;
+    margin: 70px 300px;
+    background-color: rebeccapurple;
+    border: 2px solid transparent;
+    color: white;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+}
+</style>
+
+<div class="page-info">
+    <p>We have 2 types of missions Suborbital and Orbital. A suborbital mission is where the spacecraft does not have enough velocity to enter the Earth's orbit, but briefly goes above the Earth's atmosphere and experiences weightlessness before returning to Earth. A orbital mission is where a spacraft has enough velocity to enter the Earth's orbit, and once in orbit it can stay there for an extended period of time. Here are our state of the art spacecrafts. </p>
+</div>
+<div class="flex-container">
+    <a href="/spacecrafts"><img class="img-box" src="{% static 'd.jpg' %}"></img></a>
+    <div class="page-info">
+        <h1>{{vehicles.0.name}}</h1>  <!--Galaxy 1-->
+        <p>{{vehicles.0.description}}</p>
+        <p>{{vehicles.0.recovery_description}}</p>
+        <p>Capacity: {{vehicles.0.capacity}}</p>
+        <p>Cost: {{vehicles.0.ticket_cost}} per ticket</p>
+
+    </div>
+    
+    <a href="/spacecrafts"><img class="img-box" src="{% static 'c.jpg' %}"></img></a>
+    <div class="page-info">
+        <h1>{{vehicles.1.name}}</h1>  <!--Galaxy 1-->
+        <p>{{vehicles.1.description}}</p>
+        <p>{{vehicles.1.recovery_description}}</p>
+        <p>Capacity: {{vehicles.1.capacity}}</p>
+        <p>Cost: {{vehicles.1.ticket_cost}} per ticket</p>
+    </div>
+    
+    <a href="/spacecrafts"><img class="img-box" src="{% static 'cel.jpg' %}"></img></a>
+    <div class="page-info">
+        <h1>{{vehicles.2.name}}</h1>  <!--Celectial VOyager 1-->
+        <p>{{vehicles.2.description}}</p>
+        <p>{{vehicles.2.recovery_description}}</p>
+        <p>Capacity: {{vehicles.2.capacity}}</p>
+        <p>Cost: {{vehicles.2.ticket_cost}} per ticket</p>
+    </div>
+
+    <a href="/spacecrafts"><img class="img-box" src="{% static 'stellar.jpg' %}"></img></a>
+    <div class="page-info">
+        <h1>{{vehicles.3.name}}</h1>  <!--Galaxy 1-->
+        <p>{{vehicles.3.description}}</p>
+        <p>{{vehicles.3.recovery_description}}</p>
+        <p>Capacity: {{vehicles.3.capacity}}</p>
+        <p>Cost: {{vehicles.3.ticket_cost}} per ticket</p>
+    </div>
+
+    <a href="/spacecrafts"><img class="img-box" src="{% static 'b.jpg' %}"></img></a>
+    <div class="page-info">
+        <h1>{{vehicles.4.name}}</h1>  <!--Galaxy 1-->
+        <p>{{vehicles.4.description}}</p>
+        <p>{{vehicles.4.recovery_description}}</p>
+        <p>Capacity: {{vehicles.4.capacity}}</p>
+        <p>Cost: {{vehicles.4.ticket_cost}} per ticket</p>
+    </div>
+
+    <a href="/spacecrafts"><img class="img-box" src="{% static 'a.jpg' %}"></img></a>
+    <div class="page-info">
+        <h1>{{vehicles.5.name}}</h1>  <!--Galaxy 1-->
+        <p>{{vehicles.5.description}}</p>
+        <p>{{vehicles.5.recovery_description}}</p>
+        <p>Capacity: {{vehicles.5.capacity}}</p>
+        <p>Cost: {{vehicles.5.ticket_cost}} per ticket</p>
+    </div>
+
+        
+    
+</div>
+
+
+{% endblock %}
